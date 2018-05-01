@@ -5,6 +5,19 @@ const keys = require('../config/keys');
 
 const User = mongoose.model('users');
 
+// generate token to put in cookie
+// user is a mongoose model
+passport.serializeUser((user, done) => {
+  done(null, user.id);
+});
+
+// turn id into mongoose model
+passport.deserializeUser((id, done) => {
+  User.findById(id).then(user => {
+    done(null, user);
+  });
+});
+
 passport.use(
   new GoogleStrategy(
     {
