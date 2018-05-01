@@ -7,7 +7,7 @@ require('./models/User');
 require('./services/passport');
 
 // MongoDB Connection
-mongoose.connect('mongodb://127.0.0.1/mern-stack-app');
+mongoose.connect(keys.mongodb);
 mongoose.Promise = global.Promise;
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error: '));
