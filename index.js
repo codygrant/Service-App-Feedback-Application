@@ -7,10 +7,7 @@ require('./models/User');
 require('./services/passport');
 
 // MongoDB Connection
-mongoose.connect(keys.mongodb);
-mongoose.Promise = global.Promise;
-const db = mongoose.connection;
-db.on('error', console.error.bind(console, 'MongoDB connection error: '));
+mongoose.connect(keys.mongoURI);
 
 const app = express();
 
