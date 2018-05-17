@@ -26,18 +26,17 @@ passport.use(
       callbackURL: '/auth/google/callback',
       proxy: true   // make heroku happy
     },
-    (accessToken, refreshToken, profile, done) => {
-      User.findOne({ googleId: profile.id }).then(existingUser => {
-        if (existingUser) {
-          // already exists
-          done(null, existingUser);
-        } else {
-          // make new record
-          new User({ googleId: profile.id })
-            .save()
-            .then(user => done(null, user));
-        }
-      });
+    async (accessToken, refreshToken, profile, done) => {
+      const existingUser = await User.findOne({ googleId: profile.id });
+
+      if (existingUser) {
+        // already exists
+        return done(null, existingUser);
+      }
+
+      // make new record
+      const user = await new User({ googleId: profile.id }).save();
+      done(null, user);
     }
   )
 );
