@@ -4,9 +4,9 @@ import { connect } from 'react-redux';  // connection helper so App class can ca
 import * as actions from '../actions';  // take all actions in file and assign to 'actions'
 
 import Header from './Header';
+import Landing from './Landing';
 const Dashboard = () => <h2>Dashboard</h2>;
 const SurveyNew = () => <h2>SurveyNew</h2>;
-const Landing = () => <h2>Landing</h2>;
 
 class App extends Component {
   componentDidMount() {
@@ -27,6 +27,6 @@ class App extends Component {
       </div>
     );
   }
-};
+}
 
 export default connect(null, actions)(App);
