@@ -1,16 +1,18 @@
-const express = require('express');
-const mongoose = require('mongoose');
-const cookieSession = require('cookie-session');
-const passport = require('passport');
-const keys = require('./config/keys');
-require('./models/User');
-require('./services/passport');
+const express = require("express");
+const mongoose = require("mongoose");
+const cookieSession = require("cookie-session");
+const passport = require("passport");
+const bodyParser = require("body-parser");
+const keys = require("./config/keys");
+require("./models/User");
+require("./services/passport");
 
 // MongoDB Connection
 mongoose.connect(keys.mongoURI);
 
 const app = express();
 
+app.use(bodyParser.json());
 // cookies
 app.use(
   cookieSession({
@@ -22,7 +24,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // add express object to routes
-require('./routes/authRoutes')(app);
+require("./routes/authRoutes")(app);
+require("/routes/billingRoutes")(app);
 
 // for production deployment
 const PORT = process.env.PORT || 5000;
