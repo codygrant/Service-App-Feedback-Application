@@ -25,7 +25,7 @@ app.use(passport.session());
 
 // add express object to routes
 require("./routes/authRoutes")(app);
-require("/routes/billingRoutes")(app);
+require("./routes/billingRoutes")(app);
 
 // for production deployment
 const PORT = process.env.PORT || 5000;
