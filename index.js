@@ -1,12 +1,12 @@
-const express = require("express");
-const mongoose = require("mongoose");
-const cookieSession = require("cookie-session");
-const passport = require("passport");
-const bodyParser = require("body-parser");
-const keys = require("./config/keys");
-require("./models/User");
-require("./models/Survey");
-require("./services/passport");
+const express = require('express');
+const mongoose = require('mongoose');
+const cookieSession = require('cookie-session');
+const passport = require('passport');
+const bodyParser = require('body-parser');
+const keys = require('./config/keys');
+require('./models/User');
+require('./models/Survey');
+require('./services/passport');
 
 // MongoDB Connection
 mongoose.connect(keys.mongoURI);
@@ -25,20 +25,21 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 // add express object to routes
-require("./routes/authRoutes")(app);
-require("./routes/billingRoutes")(app);
+require('./routes/authRoutes')(app);
+require('./routes/billingRoutes')(app);
+require('./routes/surveyRoutes')(app);
 
 // for production only
-if (process.env.NODE_ENV === "production") {
+if (process.env.NODE_ENV === 'production') {
   // Express will serve up production assets
   // like main.js or main.css
-  app.use(express.static("client/build"));
+  app.use(express.static('client/build'));
 
   // Express will serve up the index.html file
   // if it doesn't recognize the route
-  const path = require("path");
-  app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+  const path = require('path');
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
   });
 }
 
