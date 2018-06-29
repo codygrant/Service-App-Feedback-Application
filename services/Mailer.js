@@ -43,7 +43,7 @@ class Mailer extends helper.Mail {
 
   async send() {
     // more SendGrid documentation
-    const request = this.sendGridApi.emptyRequest({
+    const request = await this.sendGridApi.emptyRequest({
       method: 'POST',
       path: '/v3/mail/send',
       body: this.toJSON()
